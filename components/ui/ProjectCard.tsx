@@ -63,10 +63,18 @@ export const ProjectCard = ({ project, compact = false }: ProjectCardProps) => {
               Live Demo
             </Link>
           )}
-          <Link href={project.githubUrl} target="_blank" className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            <Code size={16} />
-            View Code
-          </Link>
+          {project.githubUrl && (
+            <Link href={project.githubUrl} target="_blank" className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
+              <Code size={16} />
+              View Code
+            </Link>
+          )}
+          {project.itchUrl && (
+            <Link href={project.itchUrl} target="_blank" className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
+              <ExternalLink size={16} />
+              Play on Itch.io
+            </Link>
+          )}
         </div>
       </div>
     </motion.div>
