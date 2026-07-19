@@ -59,7 +59,7 @@ export const Navbar = () => {
               isScrolled ? "max-w-[150px] opacity-100" : "max-w-0 opacity-0 pointer-events-none"
             }`}
           >
-            <div className="relative flex items-center justify-center h-3 sm:h-3.5 w-auto shrink-0 mr-2.5">
+            <div className="relative flex items-center justify-center h-5 sm:h-[22px] w-auto shrink-0 mr-3">
               <img
                 src="/myLogo.png"
                 alt="MyLogo"
