@@ -61,7 +61,7 @@ export const Navbar = () => {
           >
             <div className="relative flex items-center justify-center h-10 sm:h-12 w-auto min-w-[44px] shrink-0">
               <img
-                src="/MyLogo.png"
+                src="/myLogo.png"
                 alt="MyLogo"
                 className="h-full w-auto object-contain"
                 onError={(e) => {

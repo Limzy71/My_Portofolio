@@ -11,8 +11,13 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const syne = Syne({ subsets: ["latin"], variable: "--font-syne", weight: ["400", "500", "600", "700", "800"] });
 
 export const metadata: Metadata = {
-  title: "La Ode Muh. Ikhsan Mbala - Tech Portfolio",
+  title: "Ikhsanmbala",
   description: "Portfolio of La Ode Muh. Ikhsan Mbala, a Full-Stack and Mobile Developer.",
+  icons: {
+    icon: "/myLogo.png",
+    shortcut: "/myLogo.png",
+    apple: "/myLogo.png",
+  },
 };
 
 export default function RootLayout({
