@@ -10,10 +10,10 @@ export const skills: SkillCategory[] = [
   },
   {
     category: "Backend",
-    items: ["Laravel", "PHP", "MySQL", "PostgreSQL", "Supabase"],
+    items: ["Laravel", "PHP", "Java", "MySQL", "PostgreSQL", "Supabase"],
   },
   {
     category: "Mobile & Tools",
-    items: ["Flutter", "Dart", "Android Studio", "Git", "Herd", "Aseprite", "Inkscape"],
+    items: ["Flutter", "Dart", "Android Studio", "Git", "Laravel Herd", "Aseprite", "Inkscape"],
   },
 ];
