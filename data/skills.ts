@@ -6,7 +6,7 @@ export interface SkillCategory {
 export const skills: SkillCategory[] = [
   {
     category: "Frontend",
-    items: ["HTML 5 / CSS3", "Tailwind CSS", "React", "Next.js", "JavaScript / TypeScript"],
+    items: ["HTML 5 / CSS3", "Tailwind CSS", "JavaScript / TypeScript", "React", "Next.js"],
   },
   {
     category: "Backend",
