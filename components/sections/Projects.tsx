@@ -116,7 +116,7 @@ const ProjectRow = ({
                   <Image src={project.image} alt={project.title} fill className="object-cover" />
                 </div>
                 
-                <p className="text-zinc-400 text-sm lg:text-base leading-relaxed mb-8 max-w-3xl">
+                <p className="text-zinc-400 text-sm lg:text-base leading-relaxed mb-8 max-w-3xl text-justify">
                   {project.description}
                 </p>
 

@@ -44,7 +44,7 @@ export const ProjectCard = ({ project, compact = false }: ProjectCardProps) => {
           </div>
         </div>
         
-        <p className={`text-sm text-zinc-400 mb-4 flex-grow ${compact ? 'line-clamp-2' : ''}`}>
+        <p className={`text-sm text-zinc-400 mb-4 flex-grow text-justify ${compact ? 'line-clamp-2' : ''}`}>
           {project.description}
         </p>
         
