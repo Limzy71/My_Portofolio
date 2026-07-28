@@ -103,7 +103,7 @@ export const projects: Project[] = [
   },
   {
     title: "Petualangan si Minus",
-    description: "Petualangan si Minus is an educational math game tailored for 3rd-grade students, focusing on subtraction through fun and engaging mechanics. As the Game Programmer, I developed the core educational quiz system and implemented an accessible, simplified turn-based combat loop. Additionally, acting as a Game Artist, I designed and illustrated a variety of creative costumes for the main character, adding a delightful layer of personalization for young players.",
+    description: "Petualangan si Minus is an educational math game tailored for 3rd-grade students, focusing on subtraction through fun mechanics. As a Game Artist, I was responsible for designing all enemy monster characters throughout every level, as well as various key environmental assets like terrain, clouds, and background elements to create an engaging world for players.",
     techStack: ["Adobe Animate"],
     category: "Game",
     itchUrl: "https://malhikuna.itch.io/petualangan-si-minus",
@@ -113,7 +113,7 @@ export const projects: Project[] = [
   },
   {
     title: "Cyber Infiltrator",
-    description: "Developed during my Informatics Engineering undergraduate studies, Cyber Infiltrator is a 2D retro-styled stealth action game that challenges players to navigate complex security systems. As the lead Game Programmer, I engineered the core gameplay logic and mobile-optimized stealth mechanics using Unity and C#, while also implementing custom shaders to achieve an authentic CRT monitor visual distortion that enhances the game's aesthetic.",
+    description: "Cyber Infiltrator is a 2D retro stealth action game developed as a group project during my undergraduate studies. Serving as the project's sole Game Artist, I conceptualized and crafted all visual assets from scratch, including the main character, guard sprites, and interactive environment graphics to establish a cohesive retro visual style.",
     techStack: ["Unity 6", "Aseprite", "Inkscape"],
     category: "Game",
     itchUrl: "https://malhikuna.itch.io/cyber-infiltrator",
