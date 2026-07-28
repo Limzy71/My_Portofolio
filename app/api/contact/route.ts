@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     const data = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: "laodemuhikhsan18@gmail.com",
-      subject: `New Portfolio Message from ${name}`,
+      subject: `Pesan Baru Portfolio dari ${name}`,
       replyTo: email,
       html: `
         <div style="font-family: sans-serif; padding: 20px; color: #333; max-width: 600px; border: 1px solid #eee; border-radius: 10px;">
