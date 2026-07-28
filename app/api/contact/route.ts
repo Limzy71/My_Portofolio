@@ -14,10 +14,9 @@ export async function POST(req: Request) {
       );
     }
 
-    // Mendukung RESEND_API_KEY maupun NEXT_PUBLIC_RESEND_API_KEY jika ada variasi nama di Vercel
     const apiKey = process.env.RESEND_API_KEY || process.env.NEXT_PUBLIC_RESEND_API_KEY;
     if (!apiKey) {
-      console.error("RESEND_API_KEY missing. Keys available:", Object.keys(process.env));
+      console.error("RESEND_API_KEY missing from environment variables.");
       return NextResponse.json(
         { error: "Konfigurasi server belum lengkap (RESEND_API_KEY missing)." },
         { status: 500 }
@@ -26,9 +25,10 @@ export async function POST(req: Request) {
 
     const resend = new Resend(apiKey);
 
+    // Di akun Resend gratisan (onboarding@resend.dev), email penerima 'to' harus sesuai dengan email pendaftaran akun Resend Anda (iksanjr032@gmail.com)
     const data = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: ["laodemuhikhsan18@gmail.com"],
+      to: ["iksanjr032@gmail.com"],
       subject: `[Portfolio Contact] Pesan Baru dari ${name}`,
       replyTo: email,
       html: `
