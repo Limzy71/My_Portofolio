@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../ui/Button";
 import { Mail, MapPin, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa6";
@@ -44,6 +44,11 @@ export const Contact = () => {
 
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
+
+      // Hilangkan notifikasi hijau secara otomatis setelah 3.5 detik dengan efek smooth fade out
+      setTimeout(() => {
+        setStatus("idle");
+      }, 3500);
     } catch (err: unknown) {
       setStatus("error");
       if (err instanceof Error) {
@@ -196,20 +201,36 @@ export const Contact = () => {
                 ></textarea>
               </div>
 
-              {/* Status Notifications */}
-              {status === "success" && (
-                <div className="flex items-center gap-3 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm">
-                  <CheckCircle2 size={20} className="shrink-0" />
-                  <span>Your message has been sent successfully! I&apos;ll get back to you as soon as possible.</span>
-                </div>
-              )}
+              {/* Status Notifications dengan AnimatePresence (Smooth Fade In & Fade Out) */}
+              <AnimatePresence mode="wait">
+                {status === "success" && (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex items-center gap-3 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm"
+                  >
+                    <CheckCircle2 size={20} className="shrink-0" />
+                    <span>Your message has been sent successfully! I&apos;ll get back to you as soon as possible.</span>
+                  </motion.div>
+                )}
 
-              {status === "error" && (
-                <div className="flex items-center gap-3 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-sm">
-                  <AlertCircle size={20} className="shrink-0" />
-                  <span>{errorMessage || "Failed to send message. Please try again."}</span>
-                </div>
-              )}
+                {status === "error" && (
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex items-center gap-3 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-sm"
+                  >
+                    <AlertCircle size={20} className="shrink-0" />
+                    <span>{errorMessage || "Failed to send message. Please try again."}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <Button
                 type="submit"
