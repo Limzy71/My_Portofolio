@@ -1,6 +1,8 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: Request) {
   try {
     const { name, email, message } = await req.json();
@@ -23,7 +25,6 @@ export async function POST(req: Request) {
 
     const resend = new Resend(apiKey);
 
-    // Pengirim default Resend sebelum verifikasi custom domain adalah onboarding@resend.dev
     const data = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: ["laodemuhikhsan18@gmail.com"],
