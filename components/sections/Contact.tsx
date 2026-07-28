@@ -1,10 +1,59 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "../ui/Button";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa6";
 
 export const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setStatus("error");
+      setErrorMessage("Please fill in all fields.");
+      return;
+    }
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        throw new Error(data.error || "Failed to send message.");
+      }
+
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err: unknown) {
+      setStatus("error");
+      if (err instanceof Error) {
+        setErrorMessage(err.message);
+      } else {
+        setErrorMessage("An unexpected error occurred. Please try again.");
+      }
+    }
+  };
+
   return (
     <section id="contact" className="py-24">
       <div className="container mx-auto px-6">
@@ -87,13 +136,13 @@ export const Contact = () => {
               <div className="pt-2">
                 <p className="text-xs text-zinc-500 uppercase tracking-widest mb-3 font-mono">Connect elsewhere</p>
                 <div className="flex items-center gap-3 text-zinc-400">
-                  <a href="https://github.com/Limzy71" className="p-2.5 bg-zinc-900 border border-zinc-800 rounded-lg hover:text-primary hover:border-primary/50 transition-colors">
+                  <a href="https://github.com/Limzy71" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-zinc-900 border border-zinc-800 rounded-lg hover:text-primary hover:border-primary/50 transition-colors">
                     <FaGithub size={16} />
                   </a>
-                  <a href="https://www.linkedin.com/in/laodemuhikhsanmbala/" className="p-2.5 bg-zinc-900 border border-zinc-800 rounded-lg hover:text-primary hover:border-primary/50 transition-colors">
+                  <a href="https://www.linkedin.com/in/laodemuhikhsanmbala/" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-zinc-900 border border-zinc-800 rounded-lg hover:text-primary hover:border-primary/50 transition-colors">
                     <FaLinkedin size={16} />
                   </a>
-                  <a href="https://www.instagram.com/ikhsanlaode_/" className="p-2.5 bg-zinc-900 border border-zinc-800 rounded-lg hover:text-primary hover:border-primary/50 transition-colors">
+                  <a href="https://www.instagram.com/ikhsanlaode_/" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-zinc-900 border border-zinc-800 rounded-lg hover:text-primary hover:border-primary/50 transition-colors">
                     <FaInstagram size={16} />
                   </a>
                 </div>
@@ -103,13 +152,16 @@ export const Contact = () => {
 
           {/* Form Right Side */}
           <div className="w-full lg:w-7/12 flex flex-col justify-between">
-            <form className="space-y-6 flex flex-col h-full justify-between" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6 flex flex-col h-full justify-between" onSubmit={handleSubmit}>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium text-zinc-300">Name</label>
                   <input
                     type="text"
                     id="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
                     suppressHydrationWarning
                     className="w-full px-4 py-3 rounded-xl bg-zinc-900/60 border border-zinc-800 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-foreground placeholder:text-zinc-600"
                     placeholder="John Doe"
@@ -120,6 +172,9 @@ export const Contact = () => {
                   <input
                     type="email"
                     id="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
                     suppressHydrationWarning
                     className="w-full px-4 py-3 rounded-xl bg-zinc-900/60 border border-zinc-800 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-foreground placeholder:text-zinc-600"
                     placeholder="john@example.com"
@@ -132,14 +187,43 @@ export const Contact = () => {
                 <textarea
                   id="message"
                   rows={7}
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
                   suppressHydrationWarning
                   className="w-full flex-1 px-4 py-3 rounded-xl bg-zinc-900/60 border border-zinc-800 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-foreground placeholder:text-zinc-600 resize-none min-h-[160px]"
                   placeholder="Tell me about your project..."
                 ></textarea>
               </div>
 
-              <Button type="submit" className="w-full shadow-none hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] bg-primary text-zinc-950 font-bold hover:bg-primary/90 transition-all">
-                Send Message
+              {/* Status Notifications */}
+              {status === "success" && (
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm">
+                  <CheckCircle2 size={20} className="shrink-0" />
+                  <span>Your message has been sent successfully! I&apos;ll get back to you as soon as possible.</span>
+                </div>
+              )}
+
+              {status === "error" && (
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-sm">
+                  <AlertCircle size={20} className="shrink-0" />
+                  <span>{errorMessage || "Failed to send message. Please try again."}</span>
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                disabled={status === "loading"}
+                className="w-full shadow-none hover:shadow-[0_0_20px_rgba(34,211,238,0.3)] bg-primary text-zinc-950 font-bold hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {status === "loading" ? (
+                  <span className="flex items-center gap-2">
+                    <Loader2 className="animate-spin" size={18} />
+                    Sending Message...
+                  </span>
+                ) : (
+                  "Send Message"
+                )}
               </Button>
             </form>
           </div>
