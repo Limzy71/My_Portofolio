@@ -14,9 +14,10 @@ export async function POST(req: Request) {
       );
     }
 
-    const apiKey = process.env.RESEND_API_KEY;
+    // Mendukung RESEND_API_KEY maupun NEXT_PUBLIC_RESEND_API_KEY jika ada variasi nama di Vercel
+    const apiKey = process.env.RESEND_API_KEY || process.env.NEXT_PUBLIC_RESEND_API_KEY;
     if (!apiKey) {
-      console.error("RESEND_API_KEY is missing from environment variables.");
+      console.error("RESEND_API_KEY missing. Keys available:", Object.keys(process.env));
       return NextResponse.json(
         { error: "Konfigurasi server belum lengkap (RESEND_API_KEY missing)." },
         { status: 500 }
