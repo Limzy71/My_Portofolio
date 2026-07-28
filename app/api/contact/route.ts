@@ -26,14 +26,14 @@ export async function POST(req: Request) {
     const resend = new Resend(apiKey);
 
     const data = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
-      to: ["laodemuhikhsan18@gmail.com"],
+      from: "onboarding@resend.dev",
+      to: "laodemuhikhsan18@gmail.com",
       subject: `[Portfolio Contact] Pesan Baru dari ${name}`,
       replyTo: email,
       html: `
         <div style="font-family: sans-serif; padding: 20px; color: #333; max-width: 600px; border: 1px solid #eee; border-radius: 10px;">
           <h2 style="color: #0891b2; border-bottom: 2px solid #0891b2; padding-bottom: 10px;">Pesan Baru dari Halaman Kontak Portfolio</h2>
-          <p><strong>Nama:</strong> ${name}</p>
+          <p><strong>Nama Pengirim:</strong> ${name}</p>
           <p><strong>Email Pengirim:</strong> <a href="mailto:${email}">${email}</a></p>
           <div style="margin-top: 20px; padding: 15px; background-color: #f9fafb; border-left: 4px solid #0891b2; border-radius: 4px;">
             <p style="margin: 0; font-weight: bold;">Pesan:</p>
