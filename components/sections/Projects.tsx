@@ -376,7 +376,7 @@ export const Projects = () => {
 
         {/* Filters */}
         <div className="relative mb-8">
-          <div className="flex overflow-x-auto pb-4 -mx-6 px-6 lg:mx-0 lg:px-0 lg:flex-wrap lg:overflow-x-visible gap-2 md:gap-4 snap-x no-scrollbar">
+          <div className="flex overflow-x-auto overflow-y-hidden pb-2 gap-2 md:gap-3 snap-x snap-mandatory no-scrollbar flex-nowrap lg:flex-wrap lg:overflow-x-visible lg:pb-0">
             {tabs.map((tab) => (
               <button
                 key={tab.value}
@@ -385,7 +385,7 @@ export const Projects = () => {
                   setExpandedProject(null);
                 }}
                 suppressHydrationWarning
-                className={`relative px-6 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`relative shrink-0 snap-start px-5 py-2 rounded-full text-sm font-medium transition-colors ${
                 filter === tab.value
                   ? "text-primary-foreground border-transparent"
                   : "bg-card border border-border text-zinc-400 hover:text-primary hover:border-primary/50"
@@ -403,7 +403,6 @@ export const Projects = () => {
             </button>
           ))}
           </div>
-          <div className="absolute top-0 right-[-24px] lg:right-0 bottom-4 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none lg:hidden" />
         </div>
 
         {/* Editorial List */}
