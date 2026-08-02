@@ -194,10 +194,8 @@ export const Projects = () => {
   const isHoveringRef = useRef(false);
   
   // Performance-optimized motion values with responsive spring physics
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { stiffness: 150, damping: 18, mass: 0.15 });
-  const smoothY = useSpring(mouseY, { stiffness: 150, damping: 18, mass: 0.15 });
+  const smoothX = useSpring(0, { stiffness: 150, damping: 18, mass: 0.15 });
+  const smoothY = useSpring(0, { stiffness: 150, damping: 18, mass: 0.15 });
   
   const [isFlipped, setIsFlipped] = useState(false);
   const [isFlippedYTop, setIsFlippedYTop] = useState(false);
@@ -290,16 +288,14 @@ export const Projects = () => {
     targetX = Math.max(0, Math.min(targetX, rect.width - imageWidth));
     
     if (!isHoveringRef.current) {
-      mouseX.jump(targetX);
-      mouseY.jump(targetY);
       smoothX.jump(targetX);
       smoothY.jump(targetY);
       isHoveringRef.current = true;
     } else {
-      mouseX.set(targetX);
-      mouseY.set(targetY);
+      smoothX.set(targetX);
+      smoothY.set(targetY);
     }
-  }, [isFlipped, isFlippedYTop, isFlippedYBottom, mouseX, mouseY, smoothX, smoothY]);
+  }, [isFlipped, isFlippedYTop, isFlippedYBottom, smoothX, smoothY]);
 
   const handleMouseMove = (e: React.MouseEvent | React.PointerEvent) => {
     if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
