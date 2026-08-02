@@ -24,7 +24,7 @@ export const About = () => {
                 src="/profile.jpg" 
                 alt="Ikhsan Mbala" 
                 fill
-                sizes="(max-width: 768px) 100vw, 384px"
+                sizes="384px"
                 className="object-cover"
               />
               {/* Cinematic Vignette & Bottom Light Glow */}
@@ -57,12 +57,16 @@ export const About = () => {
             <p className="text-zinc-400 text-lg mb-8 leading-relaxed text-justify hyphens-auto">
               I am a Full-Stack and Mobile Developer dedicated to building scalable and maintainable applications. My professional journey focuses on creating clean architectures and robust engineering solutions. Beyond traditional web and mobile development, I also explore my creative versatility through Game Art, bringing unique digital experiences to life.
             </p>
-            <a href="/CV_La_Ode_Muh_Ikhsan_Mbala_Software_Engineer.pdf" target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" className="gap-2">
-                <Download size={18} />
-                View CV
-              </Button>
-            </a>
+            <Button
+              href="/CV_La_Ode_Muh_Ikhsan_Mbala_Software_Engineer.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="outline"
+              className="gap-2"
+            >
+              <Download size={18} />
+              View CV
+            </Button>
           </div>
         </motion.div>
       </div>

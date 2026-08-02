@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const syne = Syne({ subsets: ["latin"], variable: "--font-syne", weight: ["400", "500", "600", "700", "800"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://my-portofolio-ruddy-seven.vercel.app"),
+  metadataBase: new URL("https://ikhsanod.my.id"),
   title: {
     default: "La Ode Muh. Ikhsan Mbala | Full-Stack & Mobile Developer",
     template: "%s | La Ode Muh. Ikhsan Mbala",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://my-portofolio-ruddy-seven.vercel.app",
+    url: "https://ikhsanod.my.id",
     title: "La Ode Muh. Ikhsan Mbala | Full-Stack & Mobile Developer",
     description:
       "Official Portfolio of La Ode Muh. Ikhsan Mbala (ikhsanlaode). Explore my projects, technical skills, and software engineering journey.",
@@ -91,8 +91,8 @@ export default function RootLayout({
       "Ikhsan Mbala",
       "Ikhsan La Ode",
     ],
-    url: "https://my-portofolio-ruddy-seven.vercel.app",
-    image: "https://my-portofolio-ruddy-seven.vercel.app/profile.jpg",
+    url: "https://ikhsanod.my.id",
+    image: "https://ikhsanod.my.id/profile.jpg",
     jobTitle: "Full-Stack Developer & Mobile Engineer",
     sameAs: [
       "https://github.com/Limzy71",

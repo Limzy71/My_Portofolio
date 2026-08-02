@@ -2,9 +2,25 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "outline" | "ghost";
+type ButtonVariant = "primary" | "outline" | "ghost";
+
+interface ButtonBaseProps {
+  variant?: ButtonVariant;
+  className?: string;
+  children?: React.ReactNode;
 }
+
+type ButtonAsButtonProps = ButtonBaseProps &
+  Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof ButtonBaseProps> & {
+    href?: undefined;
+  };
+
+type ButtonAsAnchorProps = ButtonBaseProps &
+  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof ButtonBaseProps> & {
+    href: string;
+  };
+
+type ButtonProps = ButtonAsButtonProps | ButtonAsAnchorProps;
 
 export const Button: React.FC<ButtonProps> = ({ className, variant = "primary", children, ...props }) => {
   const baseStyle = "inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all focus:outline-none";
@@ -14,8 +30,22 @@ export const Button: React.FC<ButtonProps> = ({ className, variant = "primary", 
     ghost: "text-foreground hover:text-primary hover:bg-white/5"
   };
 
+  const classes = cn(baseStyle, variants[variant], className);
+
+  if (props.href !== undefined) {
+    return (
+      <a className={classes} suppressHydrationWarning {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}>
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <button className={cn(baseStyle, variants[variant], className)} suppressHydrationWarning {...props}>
+    <button
+      className={classes}
+      suppressHydrationWarning
+      {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
       {children}
     </button>
   );

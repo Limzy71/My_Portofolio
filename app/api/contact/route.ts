@@ -3,6 +3,14 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
+const escapeHtml = (str: string) =>
+  str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
 export async function POST(req: Request) {
   try {
     const { name, email, message } = await req.json();
@@ -25,19 +33,26 @@ export async function POST(req: Request) {
 
     const resend = new Resend(apiKey);
 
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeMessage = escapeHtml(message);
+    const fromAddress =
+      process.env.RESEND_FROM_EMAIL ||
+      "Portfolio Ikhsan Mbala <onboarding@resend.dev>";
+
     const data = await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: fromAddress,
       to: "laodemuhikhsan18@gmail.com",
-      subject: `Pesan Baru Portfolio dari ${name}`,
-      replyTo: email,
+      subject: `Pesan Baru Portfolio dari ${safeName}`,
+      replyTo: safeEmail,
       html: `
         <div style="font-family: sans-serif; padding: 20px; color: #333; max-width: 600px; border: 1px solid #eee; border-radius: 10px;">
           <h2 style="color: #0891b2; border-bottom: 2px solid #0891b2; padding-bottom: 10px;">Pesan Baru dari Halaman Kontak Portfolio</h2>
-          <p><strong>Nama Pengirim:</strong> ${name}</p>
-          <p><strong>Email Pengirim:</strong> <a href="mailto:${email}">${email}</a></p>
+          <p><strong>Nama Pengirim:</strong> ${safeName}</p>
+          <p><strong>Email Pengirim:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
           <div style="margin-top: 20px; padding: 15px; background-color: #f9fafb; border-left: 4px solid #0891b2; border-radius: 4px;">
             <p style="margin: 0; font-weight: bold;">Pesan:</p>
-            <p style="white-space: pre-wrap; margin-top: 8px;">${message}</p>
+            <p style="white-space: pre-wrap; margin-top: 8px;">${safeMessage}</p>
           </div>
           <hr style="margin-top: 30px; border: none; border-top: 1px solid #eee;" />
           <p style="font-size: 12px; color: #888;">Email ini dikirim otomatis dari form kontak portfolio Anda.</p>

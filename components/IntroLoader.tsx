@@ -35,11 +35,13 @@ export const IntroLoader = () => {
     ).matches;
 
     if (prefersReducedMotion) {
-      setIsLoading(false);
-      if (typeof window !== "undefined") {
-        window.dispatchEvent(new Event("introFinished"));
-      }
-      return;
+      const finishTimer = setTimeout(() => {
+        setIsLoading(false);
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("introFinished"));
+        }
+      }, 0);
+      return () => clearTimeout(finishTimer);
     }
 
     // Disable scrolling while intro plays

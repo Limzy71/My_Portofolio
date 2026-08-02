@@ -83,7 +83,7 @@ export const Skills = () => {
                   <h3 className="text-xl font-bold text-foreground text-left">{skillGroup.category}</h3>
                 </div>
                 <div className="flex flex-wrap gap-3 justify-start">
-                  {skillGroup.items.map((item, idx) => (
+                  {skillGroup.items.map((item) => (
                     <motion.div
                       key={item}
                       variants={{

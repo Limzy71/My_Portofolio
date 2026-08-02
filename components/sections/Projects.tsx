@@ -111,9 +111,14 @@ const ProjectRow = ({
               className="overflow-hidden"
             >
               <div className="pt-8 pb-2 lg:pl-[5.25rem]">
-                {/* Mobile Image */}
-                <div className="block lg:hidden w-full h-56 mb-6 rounded-xl overflow-hidden border border-zinc-800 shadow-lg relative">
-                  <Image src={project.image} alt={project.title} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" />
+                <div className="w-full h-56 lg:h-72 mb-6 rounded-xl overflow-hidden border border-zinc-800 shadow-lg relative">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 640px"
+                    className="object-cover"
+                  />
                 </div>
                 
                 <p className="text-zinc-400 text-sm lg:text-base leading-relaxed mb-8 max-w-3xl text-justify">
@@ -152,25 +157,29 @@ const ProjectRow = ({
 
 const ProjectImage = ({ project }: { project: Project }) => {
   const [error, setError] = useState(false);
+  const isPortrait =
+    project.category === "Mobile" ||
+    (project.category === "Game" && project.title !== "Cyber Infiltrator");
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.15 }}
-      className="w-full h-full relative"
+      className="relative w-full h-full"
     >
       {!error ? (
         <Image
           src={project.image}
           alt=""
           fill
-          sizes="320px"
+          unoptimized
+          sizes={isPortrait ? "220px" : "320px"}
           className="object-cover"
           onError={() => setError(true)}
         />
       ) : (
-        <div className="w-full h-full bg-zinc-800 flex items-center justify-center text-5xl font-bold font-syne text-zinc-600">
+        <div className="w-full h-full bg-zinc-800 flex items-center justify-center text-5xl font-bold font-syne text-white">
           {project.title.charAt(0)}
         </div>
       )}

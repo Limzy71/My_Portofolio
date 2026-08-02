@@ -21,7 +21,7 @@ export const projects: Project[] = [
     techStack: ["Livewire", "Alpine.js", "Laravel", "MySQL"],
     category: "Web",
     githubUrl: "https://github.com/Naksuuuu/OutVenture",
-    image: "/projects/outventure.png",
+    image: "/projects/outventure.webp",
     isLive: false,
     role: "Fullstack Developer"
   },
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     techStack: ["TypeScript", "Express", "MySQL", "Vite"],
     category: "Web",
     githubUrl: "https://github.com/Limzy71/Motekar_Bike_ERP",
-    image: "/projects/Motekar_ERP.png",
+    image: "/projects/Motekar_ERP.webp",
     isLive: true,
     liveUrl: "https://motebike.duckdns.org",
     role: "Fullstack Developer"
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     techStack: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "Web",
     githubUrl: "https://github.com/Limzy71/Portofolio",
-    image: "/projects/Portofolio_2.png",
+    image: "/projects/Portofolio_2.webp",
     isLive: true,
     liveUrl: "https://ikhsanod.my.id",
     role: "Fullstack Developer"
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     techStack: ["PHP Native", "Tailwind CSS"],
     category: "Web",
     githubUrl: "https://github.com/Limzy71/pw2024_tubes_233040080",
-    image: "/projects/Web_Asus.png",
+    image: "/projects/Web_Asus.webp",
     isLive: false,
     role: "Fullstack Developer"
   },
@@ -63,7 +63,7 @@ export const projects: Project[] = [
     techStack: ["Bootstrap"],
     category: "Web",
     githubUrl: "https://github.com/Limzy71/Limzy71.github.io",
-    image: "/projects/Nasgor_Pusdikum.png",
+    image: "/projects/Nasgor_Pusdikum.webp",
     isLive: true  ,
     liveUrl: "https://limzy71.github.io/",
     role: "Fullstack Developer"
@@ -86,7 +86,7 @@ export const projects: Project[] = [
     description: "A desktop-based inventory management system designed to streamline the flow of incoming and outgoing goods for retail stores. Features precise transaction tracking, automated reporting capabilities, and highly robust data persistence.",
     techStack: ["Java", "JavaFX", "MySQL"],
     category: "Desktop",
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/Malhikuna/Tambora_PP1_Tubes_2025/tree/dev",
     image: "/projects/PP_1.jpeg",
     isLive: false,
     role: "Fullstack Developer"
@@ -96,7 +96,7 @@ export const projects: Project[] = [
     description: "Developed and integrated core security features for a Library Management System desktop application. I was responsible for implementing a secure user authentication system using password hashing (jBcrypt). Additionally, I engineered a document generation feature that allows users to seamlessly export library data and transaction reports into PDF format.",
     techStack: ["Java", "Swing", "MySQL"],
     category: "Desktop",
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/Malhikuna/TUBES_PP2_2025/tree/ikhsan",
     image: "/projects/PP_2.jpeg",
     isLive: false,
     role: "Front-end Developer"

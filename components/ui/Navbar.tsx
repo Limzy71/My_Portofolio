@@ -32,7 +32,7 @@ export const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+      className={`fixed left-0 right-0 z-[60] transition-all duration-500 ease-in-out ${
         isScrolled
           ? "top-4 px-4 sm:px-8"
           : "top-0 px-0"
@@ -105,16 +105,16 @@ export const Navbar = () => {
               </li>
             ))}
           </ul>
-          <a href="#contact" onClick={(e) => handleScroll(e, "#contact")}>
-            <Button
-              variant={isScrolled ? "primary" : "outline"}
-              className={`transition-all duration-500 ease-in-out ${
-                isScrolled ? "px-4 py-1.5 text-xs font-bold" : "px-5 py-2 text-sm"
-              }`}
-            >
-              Let&apos;s Connect
-            </Button>
-          </a>
+          <Button
+            href="#contact"
+            onClick={(e) => handleScroll(e, "#contact")}
+            variant={isScrolled ? "primary" : "outline"}
+            className={`transition-all duration-500 ease-in-out ${
+              isScrolled ? "px-4 py-1.5 text-xs font-bold" : "px-5 py-2 text-sm"
+            }`}
+          >
+            Let&apos;s Connect
+          </Button>
         </div>
 
         {/* Mobile Toggle */}
@@ -161,9 +161,13 @@ export const Navbar = () => {
               {link.name}
             </a>
           ))}
-          <a href="#contact" onClick={(e) => handleScroll(e, "#contact")}>
-            <Button className="w-full mt-2 text-xs py-2 transition-all duration-300">Let&apos;s Connect</Button>
-          </a>
+          <Button
+            href="#contact"
+            onClick={(e) => handleScroll(e, "#contact")}
+            className="w-full mt-2 text-xs py-2 transition-all duration-300"
+          >
+            Let&apos;s Connect
+          </Button>
         </div>
       )}
     </motion.nav>

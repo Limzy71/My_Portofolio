@@ -4,8 +4,9 @@ import { Button } from "../ui/Button";
 import { Download, Briefcase, LayoutGrid } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
+const roles = ["Full-Stack Developer", "Mobile Developer"];
+
 export const Hero = () => {
-  const roles = ["Full-Stack Developer", "Mobile Developer"];
   const [roleIndex, setRoleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(roles[0].length);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -22,7 +23,8 @@ export const Hero = () => {
     if (typeof document !== "undefined") {
       const introNode = document.getElementById("intro-loader");
       if (!introNode) {
-        setCanAnimate(true);
+        const timer = setTimeout(() => setCanAnimate(true), 0);
+        return () => clearTimeout(timer);
       } else {
         const handleIntroFinished = () => setCanAnimate(true);
         window.addEventListener("introFinished", handleIntroFinished);
@@ -47,9 +49,11 @@ export const Hero = () => {
     }
 
     if (isDeleting && charIndex === 0) {
-      setIsDeleting(false);
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-      return;
+      const switchTimer = setTimeout(() => {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+      }, 0);
+      return () => clearTimeout(switchTimer);
     }
 
     const timer = setTimeout(() => {
@@ -131,12 +135,16 @@ export const Hero = () => {
               <LayoutGrid size={18} />
               View Work
             </Button>
-            <a href="/CV_La_Ode_Muh_Ikhsan_Mbala_Software_Engineer.pdf" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-              <Button variant="outline" className="w-full sm:w-auto gap-2">
-                <Download size={18} />
-                View CV
-              </Button>
-            </a>
+            <Button
+              href="/CV_La_Ode_Muh_Ikhsan_Mbala_Software_Engineer.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="outline"
+              className="w-full sm:w-auto gap-2"
+            >
+              <Download size={18} />
+              View CV
+            </Button>
             <Button 
               variant="outline" 
               className="w-full sm:w-auto gap-2"
