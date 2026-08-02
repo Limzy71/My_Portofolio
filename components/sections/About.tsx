@@ -24,6 +24,7 @@ export const About = () => {
                 src="/profile.jpg" 
                 alt="Ikhsan Mbala" 
                 fill
+                sizes="(max-width: 768px) 100vw, 384px"
                 className="object-cover"
               />
               {/* Cinematic Vignette & Bottom Light Glow */}

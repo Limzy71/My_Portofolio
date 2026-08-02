@@ -113,7 +113,7 @@ const ProjectRow = ({
               <div className="pt-8 pb-2 lg:pl-[5.25rem]">
                 {/* Mobile Image */}
                 <div className="block lg:hidden w-full h-56 mb-6 rounded-xl overflow-hidden border border-zinc-800 shadow-lg relative">
-                  <Image src={project.image} alt={project.title} fill className="object-cover" />
+                  <Image src={project.image} alt={project.title} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" />
                 </div>
                 
                 <p className="text-zinc-400 text-sm lg:text-base leading-relaxed mb-8 max-w-3xl text-justify">
@@ -158,13 +158,14 @@ const ProjectImage = ({ project }: { project: Project }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.15 }}
-      className="w-full h-full"
+      className="w-full h-full relative"
     >
       {!error ? (
         <Image
           src={project.image}
           alt=""
           fill
+          sizes="320px"
           className="object-cover"
           onError={() => setError(true)}
         />
