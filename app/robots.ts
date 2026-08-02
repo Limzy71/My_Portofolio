@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://ikhsanod.my.id/sitemap.xml",
+    sitemap: "https://ikhsanlaode.my.id/sitemap.xml",
   };
 }

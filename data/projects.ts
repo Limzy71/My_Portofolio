@@ -44,7 +44,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Limzy71/Portofolio",
     image: "/projects/Portofolio_2.webp",
     isLive: true,
-    liveUrl: "https://ikhsanod.my.id",
+    liveUrl: "https://ikhsanlaode.my.id",
     role: "Fullstack Developer"
   },
   {

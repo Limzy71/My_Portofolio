@@ -10,6 +10,7 @@ export const Contact = () => {
     name: "",
     email: "",
     message: "",
+    website: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -43,7 +44,7 @@ export const Contact = () => {
       }
 
       setStatus("success");
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ name: "", email: "", message: "", website: "" });
 
       // Hilangkan notifikasi hijau secara otomatis setelah 3.5 detik dengan efek smooth fade out
       setTimeout(() => {
@@ -158,6 +159,17 @@ export const Contact = () => {
           {/* Form Right Side */}
           <div className="w-full lg:w-7/12 flex flex-col justify-between">
             <form className="space-y-6 flex flex-col h-full justify-between" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute -left-[9999px] top-auto h-px w-px opacity-0"
+              />
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium text-zinc-300">Name</label>

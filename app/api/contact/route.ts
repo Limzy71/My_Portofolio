@@ -11,13 +11,70 @@ const escapeHtml = (str: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const RATE_LIMIT_MAX = 5;
+const requestsByIp = new Map<string, number[]>();
+
+const getClientIp = (req: Request): string => {
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0].trim();
+  return req.headers.get("x-real-ip") || "unknown";
+};
+
+const isRateLimited = (ip: string): boolean => {
+  const now = Date.now();
+  const timestamps = (requestsByIp.get(ip) || []).filter(
+    (t) => now - t < RATE_LIMIT_WINDOW_MS
+  );
+  if (timestamps.length >= RATE_LIMIT_MAX) {
+    requestsByIp.set(ip, timestamps);
+    return true;
+  }
+  timestamps.push(now);
+  requestsByIp.set(ip, timestamps);
+  return false;
+};
+
 export async function POST(req: Request) {
   try {
-    const { name, email, message } = await req.json();
+    const body = await req.json();
+    const { name, email, message } = body;
+
+    if (body.website) {
+      return NextResponse.json({ success: true });
+    }
+
+    if (isRateLimited(getClientIp(req))) {
+      return NextResponse.json(
+        { error: "Terlalu banyak pesan. Coba lagi beberapa saat lagi." },
+        { status: 429 }
+      );
+    }
 
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: "Nama, email, dan pesan wajib diisi." },
+        { status: 400 }
+      );
+    }
+    if (
+      typeof name !== "string" ||
+      typeof email !== "string" ||
+      typeof message !== "string"
+    ) {
+      return NextResponse.json({ error: "Data tidak valid." }, { status: 400 });
+    }
+    if (!EMAIL_REGEX.test(email)) {
+      return NextResponse.json(
+        { error: "Format email tidak valid." },
+        { status: 400 }
+      );
+    }
+    if (name.length > 200 || email.length > 200 || message.length > 5000) {
+      return NextResponse.json(
+        { error: "Pesan terlalu panjang." },
         { status: 400 }
       );
     }
