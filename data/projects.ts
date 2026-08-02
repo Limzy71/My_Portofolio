@@ -93,7 +93,7 @@ export const projects: Project[] = [
   },
   {
     title: "SIPERPUS",
-    description: "Developed and integrated core security features for a Library Management System desktop application. I was responsible for implementing a secure user authentication system using password hashing (jBcrypt). Additionally, I engineered a document generation feature that allows users to seamlessly export library data and transaction reports into PDF format.",
+    description: "Developed and integrated the core Graphical User Interface (GUI) for a Library Management System desktop application. I was responsible for implementing a dynamic central dashboard and intuitive sidebar navigation to efficiently monitor real-time library statistics. Additionally, I engineered a comprehensive transaction module featuring interactive data grids, advanced filtering, and pop-up dialogs with automated late-fee calculations to streamline the borrowing and returning process.",
     techStack: ["Java", "Swing", "MySQL"],
     category: "Desktop",
     githubUrl: "https://github.com/Malhikuna/TUBES_PP2_2025/tree/ikhsan",
